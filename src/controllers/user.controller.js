@@ -2,6 +2,7 @@ const httpStatus = require("http-status");
 const ApiError = require("../utils/ApiError");
 const catchAsync = require("../utils/catchAsync");
 const { userService } = require("../services");
+const logger = require("../config/logger");
 
 // TODO: CRIO_TASK_MODULE_UNDERSTANDING_BASICS - Implement getUser() function
 /**
@@ -39,6 +40,15 @@ const { userService } = require("../services");
  *
  */
 const getUser = catchAsync(async (req, res) => {
+  let userId=req.params.userId;
+  logger.info(userId);
+  let usr=await userService.getUserById(userId);
+  logger.info("Faisal")
+  if(usr){
+    res.status(httpStatus.OK).send(usr);
+  }else{
+    res.status(httpStatus.FORBIDDEN).send("User not found!");
+  }
 });
 
 
