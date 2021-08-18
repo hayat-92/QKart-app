@@ -83,6 +83,20 @@ userSchema.statics.isEmailTaken = async function (email) {
 
 };
 
+userSchema.methods.hasSetNonDefaultAddress = async function () {
+  const user = this;
+  // if(user.address !== config.default_address){
+  //   return true
+  // }else{
+  //   return false
+  // }
+
+  return user.address !== config.default_address
+  
+   
+};
+
+
 /**
  * Check if entered password matches the user's password
  * @param {string} password
