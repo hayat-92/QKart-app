@@ -53,6 +53,9 @@ const getUserByEmail=async(email)=>{
  */
 
 const createUser=async(user)=>{
+    if(!user.password){
+        throw new ApiError(httpStatus.BAD_REQUEST, 'Password Required!');
+      }
     let check=await User.isEmailTaken(user.email);
     if(check){
         throw new ApiError(httpStatus.OK, "Email already taken!")

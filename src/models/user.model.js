@@ -47,6 +47,26 @@ const userSchema = mongoose.Schema(
   }
 );
 
+
+userSchema.pre('save', function(next){
+  var user= this;
+
+  // if(!user.isModified('password')) return next();
+
+  bcrypt.genSalt(10, function(err, salt){
+    if (err) return next(err);
+
+    bcrypt.hash(user.password, salt, function(err, hash){
+      if (err) return next(err);
+
+      user.password = hash;
+      next();
+    });
+  });
+});
+
+
+
 // TODO: CRIO_TASK_MODULE_UNDERSTANDING_BASICS - Implement the isEmailTaken() static method
 /**
  * Check if email is taken
@@ -54,7 +74,25 @@ const userSchema = mongoose.Schema(
  * @returns {Promise<boolean>}
  */
 userSchema.statics.isEmailTaken = async function (email) {
-  return validator.isEmailTaken(email);
+  // console.log(await this.findOne({'email':email}), Boolean(null));
+  if(await this.findOne({'email':email})){
+    return true;
+  }else{
+    return false;
+  }
+
+};
+
+/**
+ * Check if entered password matches the user's password
+ * @param {string} password
+ * @returns {Promise<boolean>}
+ */
+userSchema.methods.isPasswordMatch = async function (password) {
+  let is_match= await bcrypt.compare(password, this.password);
+  console.log(`Faisal=${is_match}`)
+  return is_match;
+
 };
 
 
