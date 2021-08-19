@@ -14,12 +14,13 @@ const logger = require("../config/logger");
  * --- resolve the promise
  */
 const verifyCallback = (req, resolve, reject) => async (err, user, info) => {
+
+  logger.info("hawa-")
   if (err|| info || !user) {
     
     return reject(new ApiError(httpStatus.UNAUTHORIZED, "Please authenticate"));
   }
-  logger.info(req.user);
-  logger.info(`Faisal=>${user}`);
+  
   req.user = user;
   resolve();
 
@@ -32,6 +33,7 @@ const verifyCallback = (req, resolve, reject) => async (err, user, info) => {
 const auth = () => async (req, res, next) => {
   return new Promise((resolve, reject) => {
     // TODO: CRIO_TASK_MODULE_AUTH - Authenticate request
+    logger.info("hello-")
     passport.authenticate(
       "jwt",
       { session: false },

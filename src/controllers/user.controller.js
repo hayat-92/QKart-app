@@ -54,8 +54,7 @@ const jwt = require('jsonwebtoken')
  */
 const getUser = catchAsync(async (req, res) => {
   let head_arry = (req.headers['authorization']).split(' ');
-  let userId=req.params.userId;
-  logger.info(`Sahil->${head_arry[1]}`);
+  
   // let usr=await userService.getUserById(userId);
   if(req.query.q=='address'){
     var user=await userService.getUserAddressById(req.params.userId)
@@ -70,7 +69,7 @@ const getUser = catchAsync(async (req, res) => {
 
 
 
-  logger.info(req.user);
+  
 
   jwt.verify(head_arry[1], secret.jwt.secret, (err, payload) => {
     if (err) {
