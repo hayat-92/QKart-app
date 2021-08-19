@@ -15,6 +15,11 @@ const jwt = require('jsonwebtoken')
  * 
  *  - Return the whole user object fetched from Mongo
 
+ *  - If query param, "q" equals "address", return only the address field of the user
+ *  - Else,
+ *  - Return the whole user object fetched from Mongo
+
+ *  - If data exists for the provided "userId", return 200 status code and the object
  *  - If data doesn't exist, throw an error using `ApiError` class
  *    - Status code should be "404 NOT FOUND"
  *    - Error message, "User not found"
