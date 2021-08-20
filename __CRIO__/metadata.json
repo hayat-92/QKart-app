@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
     "module_id": "ME_QKART_BACKEND_MODULE_TEST",
+=======
+    "module_id": "ME_QKART_BACKEND_MODULE_DEPLOYMENT",
+>>>>>>> 912b35d02de3ca661384e3545c1babf5552336cf
     "me_id": "ME_QKART_BACKEND"
 }
   

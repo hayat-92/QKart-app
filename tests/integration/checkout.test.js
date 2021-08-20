@@ -50,15 +50,12 @@ describe("Cart routes", () => {
         .set("Authorization", `Bearer ${userOneAccessToken}`)
         .send();
 
+
       // TODO: CRIO_TASK_MODULE_TEST - Assert if status code is "400 BAD REQUEST"
       //  expect(true).toEqual(false);
-      expect(res.status).toEqual(httpStatus.BAD_REQUEST);
-    });
 
-    it("should return 400 if user's address is not set", async () => {
+  
       expect(userTwo.address).toEqual(config.default_address);
-
-      await insertUsers([userTwo]);
       await insertCart([cartWithProductsUserTwo]);
 
       const res = await request(app)
